@@ -14,8 +14,10 @@ RUN apk add --no-cache --update-cache --update curl ca-certificates && \
     mkdir -p /btsync/data && \
     mkdir -p /btsync/conf && \
     mkdir -p /btsync/folders
+    
+ADD btsync.conf /btsync/conf/btsync.conf
 
 EXPOSE 8888 55555
 VOLUME /btsync/folders
 ENTRYPOINT ["/opt/btsync/btsync"]
-CMD ["--nodaemon","--webui.listen","0.0.0.0:8888","--log","/btsync/data/btsync.log"]
+CMD ["--nodaemon","--webui.listen","0.0.0.0:8888","--config", "/btsync/conf/btsync.conf"]
